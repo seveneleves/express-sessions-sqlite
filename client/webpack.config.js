@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require("path");
 const webpack = require("webpack");
 
@@ -29,10 +30,16 @@ module.exports = {
       directory: path.join(__dirname, "public/"),
     },
     port: 3000,
+    historyApiFallback: true,
     devMiddleware: {
       publicPath: "https://localhost:3000/dist/",
     },
-    hot: "only",
+    proxy: {
+      "/api": {
+        target: "http://localhost:5001",
+        pathRewrite: { "^/api": "" },
+      },
+    },
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 };

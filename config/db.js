@@ -1,10 +1,10 @@
 const sqlite3 = require("sqlite3").verbose();
 
 module.exports = class Db {
-  constructor(filename) {
-    this.filename = filename;
+  constructor(dbPath) {
+    this.dbPath = dbPath;
   }
   open() {
-    return new sqlite3.Database(this.filename);
+    return new sqlite3.Database(this.dbPath);
   }
 };
